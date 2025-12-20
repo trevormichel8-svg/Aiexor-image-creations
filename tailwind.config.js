@@ -12,8 +12,7 @@ module.exports = {
         aiexorDark: "#0B0B0B",
       },
       backgroundImage: {
-        "gradient-aiexor":
-          "linear-gradient(to bottom right, #0B0B0B, #004040)",
+        "gradient-aiexor": "linear-gradient(to bottom right, #0B0B0B, #003333)",
       },
     },
   },
