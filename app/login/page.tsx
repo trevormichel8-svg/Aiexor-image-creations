@@ -1,28 +1,34 @@
-'use client';
-import { useState } from 'react';
+"use client";
+
+import { useState } from "react";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
-  const handleLogin = () => {
-    alert(`Logged in as ${email}`);
-  };
+  async function signIn() {
+    const { error } = await supabase.auth.signInWithOtp({ email });
+    if (error) setMessage(error.message);
+    else setMessage("Check your email for the login link!");
+  }
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
-      <h1 className="text-3xl font-bold mb-6">Login to Aiexor</h1>
+    <section className="login">
+      <h2>Sign in to Aiexor</h2>
       <input
+        type="email"
+        placeholder="you@example.com"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter your email"
-        className="p-3 w-80 text-black rounded mb-4"
       />
-      <button
-        onClick={handleLogin}
-        className="bg-blue-600 px-6 py-2 rounded hover:bg-blue-500"
-      >
-        Login
-      </button>
-    </main>
+      <button onClick={signIn}>Send Magic Link</button>
+      {message && <p>{message}</p>}
+    </section>
   );
 }
