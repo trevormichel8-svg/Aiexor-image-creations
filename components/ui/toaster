@@ -1,0 +1,47 @@
+"use client";
+import React, { useEffect, useState } from "react";
+
+interface Toast {
+  id: number;
+  message: string;
+  type?: "success" | "error" | "info";
+}
+
+export default function Toaster() {
+  const [toasts, setToasts] = useState<Toast[]>([]);
+
+  useEffect(() => {
+    const listener = (event: CustomEvent<Toast>) => {
+      setToasts((prev) => [...prev, { ...event.detail, id: Date.now() }]);
+      setTimeout(() => setToasts((prev) => prev.slice(1)), 4000);
+    };
+
+    window.addEventListener("toast", listener as EventListener);
+    return () => window.removeEventListener("toast", listener as EventListener);
+  }, []);
+
+  return (
+    <div className="fixed bottom-4 right-4 flex flex-col gap-2 z-50">
+      {toasts.map((t) => (
+        <div
+          key={t.id}
+          className={`px-4 py-2 rounded-md shadow-md border-l-4 ${
+            t.type === "success"
+              ? "border-[#00FFAA] bg-[#0D0D0D]"
+              : t.type === "error"
+              ? "border-[#FF4444] bg-[#1A0000]"
+              : "border-[#FFD700] bg-[#0B0B0B]"
+          } text-sm text-gray-100 transition-all`}
+        >
+          {t.message}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* 🔧 Example:
+   window.dispatchEvent(new CustomEvent("toast", {
+     detail: { message: "Image generated!", type: "success" }
+   }));
+*/
