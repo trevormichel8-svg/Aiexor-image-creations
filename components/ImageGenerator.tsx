@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import LoadingOverlay from "./loading-overlay";
 
 export default function ImageGenerator() {
@@ -26,26 +26,27 @@ export default function ImageGenerator() {
         body: JSON.stringify({ prompt }),
       });
 
+      const data = await res.json();
+
       if (!res.ok) {
-        throw new Error("Failed to generate image");
+        throw new Error(data.error || "Generation failed");
       }
 
-      const data = await res.json();
       setImageUrl(data.imageUrl);
-    } catch (err) {
-      setError("Something went wrong. Please try again.");
+    } catch (err: any) {
+      setError(err.message ?? "Something went wrong");
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <div className="w-full max-w-xl mx-auto space-y-4">
+    <div className="max-w-xl mx-auto space-y-4">
       {loading && <LoadingOverlay />}
 
       <textarea
         className="w-full p-3 border rounded-md"
-        placeholder="Describe the image you want to generate..."
+        placeholder="Describe the image you want..."
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
         rows={4}
@@ -59,18 +60,14 @@ export default function ImageGenerator() {
         Generate Image
       </button>
 
-      {error && (
-        <p className="text-red-500 text-sm">{error}</p>
-      )}
+      {error && <p className="text-red-500 text-sm">{error}</p>}
 
       {imageUrl && (
-        <div className="mt-4">
-          <img
-            src={imageUrl}
-            alt="Generated"
-            className="w-full rounded-md"
-          />
-        </div>
+        <img
+          src={imageUrl}
+          alt="Generated"
+          className="w-full rounded-md"
+        />
       )}
     </div>
   );
