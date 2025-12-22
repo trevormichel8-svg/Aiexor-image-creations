@@ -1,4 +1,4 @@
-import "../globals.css";
+import "../styles/globals.css";
 import AnimatedBackground from "../components/AnimatedBackground";
 
 export const metadata = {
