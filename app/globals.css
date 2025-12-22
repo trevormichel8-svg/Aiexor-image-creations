@@ -105,3 +105,57 @@ select {
 input::placeholder {
   color: var(--text-muted);
 }
+
+/* ===============================
+   CINEMATIC GOLD STREAK LAYERS
+================================ */
+body::after {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  background:
+    linear-gradient(
+      120deg,
+      transparent 20%,
+      rgba(255,179,71,0.08) 40%,
+      transparent 60%
+    ),
+    linear-gradient(
+      300deg,
+      transparent 30%,
+      rgba(255,179,71,0.06) 50%,
+      transparent 70%
+    );
+  animation: streak-drift 18s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes streak-drift {
+  from {
+    transform: translateY(-10%) translateX(-10%);
+  }
+  to {
+    transform: translateY(10%) translateX(10%);
+  }
+}
+
+/* ===============================
+   HERO GLOW
+================================ */
+.hero-glow {
+  position: relative;
+}
+
+.hero-glow::before {
+  content: "";
+  position: absolute;
+  inset: -60px;
+  background: radial-gradient(
+    circle at center,
+    rgba(255,179,71,0.25),
+    transparent 70%
+  );
+  filter: blur(40px);
+  z-index: -1;
+}

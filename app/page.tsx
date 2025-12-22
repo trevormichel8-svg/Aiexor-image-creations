@@ -119,26 +119,31 @@ export default function HomePage() {
   return (
     <main className="min-h-screen flex flex-col items-center px-4 pt-14 pb-20">
       {/* HERO + GENERATOR */}
-      <section className="w-full max-w-[420px] text-center">
+      <section className="w-full max-w-[420px] text-center hero-glow">
         <div className="flex justify-center mb-6">
           <div className="text-6xl gold-text font-bold">A</div>
         </div>
 
-        <h1 className="text-3xl font-bold leading-tight mb-4">
-          Create Stunning AI Images
-          <br />
-          <span className="gold-text">in Seconds.</span>
-        </h1>
+        <h1 className="text-[2.1rem] font-bold leading-tight mb-4">
+  <span className="block text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">
+    Welcome to Aiexor.com
+  </span>
+  <span className="block gold-text drop-shadow-[0_0_35px_rgba(255,179,71,0.6)]">
+     Let Your Imagination Guide You
+  </span>
+</h1>
 
-        <p className="text-sm text-muted mb-8">
-          Turn your ideas into incredible visuals with Aiexor’s powerful AI image
-          generator. Fast, easy, and limitless creativity at your fingertips.
-        </p>
+        <p className="text-sm text-muted mb-10 leading-relaxed">
+  Turn your ideas into incredible AI art with Aiexor Image Generator
+  powered by OPENAI.
+  <br />
+  Fast, easy, and limitless creativity at your fingertips.
+</p>
 
         {/* GENERATOR CARD */}
         <div className="glass glow-border rounded-2xl p-5">
           <h3 className="font-semibold mb-4 flex items-center gap-2 text-left">
-            🤖 AI Image Generator
+            AI Image Generator
           </h3>
 
           <div className="space-y-3">
@@ -177,7 +182,7 @@ export default function HomePage() {
       {/* FEATURES */}
       <section className="w-full max-w-[420px] mt-16 space-y-10">
         <div>
-          <div className="text-xl mb-2">⚡</div>
+          <div className="text-xl mb-2"></div>
           <h4 className="font-semibold mb-1">Speed</h4>
           <p className="text-sm text-muted">
             Generate high-quality images in just seconds.
@@ -196,7 +201,7 @@ export default function HomePage() {
           <div className="text-xl mb-2">💎</div>
           <h4 className="font-semibold mb-1">Quality</h4>
           <p className="text-sm text-muted">
-            Powered by advanced AI for stunning, high-resolution results.
+            Powered by OPENAI for stunning, high-resolution results.
           </p>
         </div>
       </section>
