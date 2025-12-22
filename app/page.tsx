@@ -109,41 +109,37 @@ export default function HomePage() {
   const [style, setStyle] = useState(styles[0]);
 
   const handleGenerate = () => {
-    const cleanedPrompt = prompt.trim();
-    if (!cleanedPrompt) return;
+    if (!prompt.trim()) return;
 
-    const finalPrompt = style === "None" ? cleanedPrompt : `${cleanedPrompt}, ${style}`;
+    const finalPrompt =
+      style === "None" ? prompt : `${prompt}, ${style}`;
+
     console.log("Generate:", finalPrompt);
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center px-4 pt-14 pb-20">
-      {/* HERO + GENERATOR */}
-      <section className="w-full max-w-[420px] text-center hero-glow">
-        <div className="flex justify-center mb-6">
-          <div className="text-6xl gold-text font-bold">A</div>
-        </div>
+    <main className="min-h-screen flex flex-col items-center px-4 pt-20 pb-20">
+      {/* HERO */}
+      <section className="w-full max-w-[420px] text-center mb-16">
+        <h1 className="text-[2.2rem] font-semibold leading-tight mb-6">
+          <span className="block text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">
+            Aiexor.com
+          </span>
+          <span className="block gold-text drop-shadow-[0_0_35px_rgba(255,170,80,0.7)]">
+            Let Your Imagination Run Wild.
+          </span>
+        </h1>
 
-        <h1 className="text-[2.1rem] font-bold leading-tight mb-4">
-  <span className="block text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">
-    Welcome to Aiexor.com
-  </span>
-  <span className="block gold-text drop-shadow-[0_0_35px_rgba(255,179,71,0.6)]">
-     Let Your Imagination Guide You
-  </span>
-</h1>
+        <p className="text-sm text-gray-400 mb-12 leading-relaxed">
+          Turn your ideas into incredible AI art  with Aiexor Image Creator powered by OPENAI.
+          <br />
+          Fast, easy, and limitless creativity at your fingertips.
+        </p>
 
-        <p className="text-sm text-muted mb-10 leading-relaxed">
-  Turn your ideas into incredible AI art with Aiexor Image Generator
-  powered by OPENAI.
-  <br />
-  Fast, easy, and limitless creativity at your fingertips.
-</p>
-
-        {/* GENERATOR CARD */}
-        <div className="glass glow-border rounded-2xl p-5">
+        {/* GENERATOR */}
+        <div className="glass glow-border rounded-2xl p-6">
           <h3 className="font-semibold mb-4 flex items-center gap-2 text-left">
-            AI Image Generator
+             GPT-Image 1.5
           </h3>
 
           <div className="space-y-3">
@@ -151,12 +147,12 @@ export default function HomePage() {
               placeholder="Describe your image idea..."
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") handleGenerate();
-              }}
             />
 
-            <select value={style} onChange={(e) => setStyle(e.target.value)}>
+            <select
+              value={style}
+              onChange={(e) => setStyle(e.target.value)}
+            >
               {styles.map((s) => (
                 <option key={s} value={s}>
                   {s}
@@ -165,7 +161,7 @@ export default function HomePage() {
             </select>
 
             <button
-              className="btn-gold w-full py-3 text-sm"
+              className="btn-gold w-full py-3"
               onClick={handleGenerate}
               disabled={!prompt.trim()}
               style={{
@@ -180,34 +176,34 @@ export default function HomePage() {
       </section>
 
       {/* FEATURES */}
-      <section className="w-full max-w-[420px] mt-16 space-y-10">
+      <section className="w-full max-w-[420px] space-y-10">
         <div>
-          <div className="text-xl mb-2"></div>
-          <h4 className="font-semibold mb-1">Speed</h4>
-          <p className="text-sm text-muted">
+          <span className="icon-gold">⚡</span>
+          <h4 className="font-semibold mt-2">Speed</h4>
+          <p className="text-sm text-gray-400">
             Generate high-quality images in just seconds.
           </p>
         </div>
 
         <div>
-          <div className="text-xl mb-2">💡</div>
-          <h4 className="font-semibold mb-1">Creativity</h4>
-          <p className="text-sm text-muted">
+          <span className="icon-gold">💡</span>
+          <h4 className="font-semibold mt-2">Creativity</h4>
+          <p className="text-sm text-gray-400">
             Bring any concept to life with detailed, unique visuals.
           </p>
         </div>
 
         <div>
-          <div className="text-xl mb-2">💎</div>
-          <h4 className="font-semibold mb-1">Quality</h4>
-          <p className="text-sm text-muted">
+          <span className="icon-gold">💎</span>
+          <h4 className="font-semibold mt-2">Quality</h4>
+          <p className="text-sm text-gray-400">
             Powered by OPENAI for stunning, high-resolution results.
           </p>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="text-xs text-muted mt-20 text-center">
+      <footer className="text-xs text-gray-500 mt-20 text-center">
         Made with <span className="gold-text">❤</span> by Aiexor
         <br />© 2025 Aiexor
       </footer>

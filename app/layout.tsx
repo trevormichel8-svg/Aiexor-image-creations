@@ -14,10 +14,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {/* GOLD STREAK BACKGROUND */}
-        <div className="gold-streaks">
-          <span className="gold-streak" />
-          <span className="gold-streak" />
-          <span className="gold-streak" />
+        <div className="streak-layer">
+          <span className="streak" />
+          <span className="streak" />
+          <span className="streak" />
         </div>
 
         {children}

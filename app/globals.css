@@ -3,14 +3,13 @@
 @tailwind utilities;
 
 /* ===============================
-   ROOT THEME
+   ROOT COLORS
 ================================ */
 :root {
-  --bg-main: #070707;
-  --gold: #ffb347;
-  --gold-soft: rgba(255, 179, 71, 0.15);
-  --card-bg: rgba(15, 15, 15, 0.85);
-  --border-glow: rgba(255, 179, 71, 0.4);
+  --bg-black: #050505;
+  --accent-gold: #ffae50;
+  --accent-gold-soft: rgba(255, 170, 80, 0.35);
+  --card-bg: rgba(10, 10, 10, 0.85);
   --text-main: #f5f5f5;
   --text-muted: #bdbdbd;
 }
@@ -31,7 +30,7 @@ body {
 }
 
 body {
-  background-color: var(--bg-main);
+  background-color: var(--bg-black);
   color: var(--text-main);
   font-family: system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -39,18 +38,68 @@ body {
 }
 
 /* ===============================
-   BACKGROUND GLOW (SAFE)
+   PARTICLE SPECK BACKGROUND
 ================================ */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(255,179,71,0.12), transparent 40%),
-    radial-gradient(circle at 80% 30%, rgba(255,179,71,0.1), transparent 45%),
-    radial-gradient(circle at 50% 80%, rgba(255,179,71,0.08), transparent 50%);
-  z-index: -1;
+  background-image: radial-gradient(#ffffff22 0.5px, transparent 0.5px);
+  background-size: 3px 3px;
+  opacity: 0.15;
+  z-index: -3;
   pointer-events: none;
+}
+
+/* ===============================
+   GOLD STREAKS
+================================ */
+.streak-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.streak {
+  position: absolute;
+  width: 130%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 170, 80, 0.9),
+    transparent
+  );
+  filter: drop-shadow(0 0 8px rgba(255,170,80,0.8));
+  animation: streakMove linear infinite;
+}
+
+.streak:nth-child(1) {
+  top: 22%;
+  transform: rotate(-12deg);
+  animation-duration: 14s;
+}
+
+.streak:nth-child(2) {
+  top: 48%;
+  transform: rotate(10deg);
+  animation-duration: 18s;
+}
+
+.streak:nth-child(3) {
+  top: 72%;
+  transform: rotate(-8deg);
+  animation-duration: 22s;
+}
+
+@keyframes streakMove {
+  from {
+    transform: translateX(-130%) rotate(var(--r));
+  }
+  to {
+    transform: translateX(130%) rotate(var(--r));
+  }
 }
 
 /* ===============================
@@ -62,12 +111,14 @@ body::before {
 }
 
 .glow-border {
-  border: 1px solid var(--border-glow);
-  box-shadow: 0 0 24px rgba(255, 179, 71, 0.25);
+  border: 1px solid rgba(255, 170, 80, 0.8);
+  box-shadow:
+    0 0 22px rgba(255,170,80,0.35),
+    inset 0 0 12px rgba(255,170,80,0.15);
 }
 
 .gold-text {
-  background: linear-gradient(180deg, #ffd27d, #ff9f1c);
+  background: linear-gradient(180deg, #ffd37a, #ffae50);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -76,16 +127,13 @@ body::before {
    BUTTON
 ================================ */
 .btn-gold {
-  background: linear-gradient(180deg, #ffcc80, #ff9800);
+  background: linear-gradient(180deg, #ffd37a, #ffae50, #ff8c1a);
   color: #111;
   font-weight: 600;
   border-radius: 12px;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.btn-gold:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 0 22px rgba(255, 179, 71, 0.55);
+  box-shadow:
+    0 0 28px rgba(255,170,80,0.6),
+    inset 0 0 12px rgba(255,255,255,0.2);
 }
 
 /* ===============================
@@ -107,55 +155,10 @@ input::placeholder {
 }
 
 /* ===============================
-   CINEMATIC GOLD STREAK LAYERS
+   ICONS
 ================================ */
-body::after {
-  content: "";
-  position: fixed;
-  inset: -20%;
-  background:
-    linear-gradient(
-      120deg,
-      transparent 20%,
-      rgba(255,179,71,0.08) 40%,
-      transparent 60%
-    ),
-    linear-gradient(
-      300deg,
-      transparent 30%,
-      rgba(255,179,71,0.06) 50%,
-      transparent 70%
-    );
-  animation: streak-drift 18s linear infinite;
-  pointer-events: none;
-  z-index: -1;
-}
-
-@keyframes streak-drift {
-  from {
-    transform: translateY(-10%) translateX(-10%);
-  }
-  to {
-    transform: translateY(10%) translateX(10%);
-  }
-}
-
-/* ===============================
-   HERO GLOW
-================================ */
-.hero-glow {
-  position: relative;
-}
-
-.hero-glow::before {
-  content: "";
-  position: absolute;
-  inset: -60px;
-  background: radial-gradient(
-    circle at center,
-    rgba(255,179,71,0.25),
-    transparent 70%
-  );
-  filter: blur(40px);
-  z-index: -1;
+.icon-gold {
+  font-size: 1.4rem;
+  color: #ffae50;
+  filter: drop-shadow(0 0 8px rgba(255,170,80,0.9));
 }
