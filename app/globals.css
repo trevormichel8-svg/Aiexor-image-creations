@@ -1,77 +1,107 @@
-/* globals.css - no Tailwind version */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* ===============================
+   ROOT THEME
+================================ */
+:root {
+  --bg-main: #070707;
+  --gold: #ffb347;
+  --gold-soft: rgba(255, 179, 71, 0.15);
+  --card-bg: rgba(15, 15, 15, 0.85);
+  --border-glow: rgba(255, 179, 71, 0.4);
+  --text-main: #f5f5f5;
+  --text-muted: #bdbdbd;
+}
+
+/* ===============================
+   RESET
+================================ */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
-  background: linear-gradient(to bottom right, #0B0B0B, #003333);
-  color: white;
-  font-family: 'Inter', sans-serif;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 40px 20px;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  position: relative;
 }
 
-/* Headings */
-h1, h2, h3 {
-  color: #FFD700;
-  text-align: center;
-  margin-bottom: 20px;
+/* ===============================
+   BACKGROUND GLOW (SAFE)
+================================ */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,179,71,0.12), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(255,179,71,0.1), transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(255,179,71,0.08), transparent 50%);
+  z-index: -1;
+  pointer-events: none;
 }
 
-/* Buttons */
-button {
-  background-color: #FFD700;
-  color: #0B0B0B;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+/* ===============================
+   UI HELPERS
+================================ */
+.glass {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+}
+
+.glow-border {
+  border: 1px solid var(--border-glow);
+  box-shadow: 0 0 24px rgba(255, 179, 71, 0.25);
+}
+
+.gold-text {
+  background: linear-gradient(180deg, #ffd27d, #ff9f1c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ===============================
+   BUTTON
+================================ */
+.btn-gold {
+  background: linear-gradient(180deg, #ffcc80, #ff9800);
+  color: #111;
   font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  border-radius: 12px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-button:hover {
-  background-color: #00FFFF;
-  color: #0B0B0B;
-  transform: scale(1.05);
+.btn-gold:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 22px rgba(255, 179, 71, 0.55);
 }
 
-/* Inputs and selects */
-textarea, select, input {
+/* ===============================
+   INPUTS
+================================ */
+input,
+select {
   width: 100%;
-  max-width: 500px;
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  margin-bottom: 15px;
-  font-size: 16px;
-  outline: none;
+  background: #0e0e0e;
+  color: var(--text-main);
+  border: 1px solid #2a2a2a;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 14px;
 }
 
-/* Centered image */
-img {
-  max-width: 512px;
-  width: 100%;
-  height: auto;
-  margin-top: 30px;
-  border-radius: 8px;
-  border: 2px solid #FFD700;
-}
-
-/* Container */
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  text-align: center;
-  width: 100%;
-  max-width: 600px;
+input::placeholder {
+  color: var(--text-muted);
 }
