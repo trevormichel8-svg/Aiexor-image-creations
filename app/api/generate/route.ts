@@ -9,14 +9,18 @@ export async function POST(req: Request) {
   try {
     const { prompt, style } = await req.json();
 
-    if (!prompt || !style) {
-      return NextResponse.json({ error: "Missing prompt or style" }, { status: 400 });
+    if (!prompt) {
+      return NextResponse.json({ error: "Missing prompt" }, { status: 400 });
     }
 
-    const finalPrompt = `${style} style: ${prompt}`;
+    // If no style is chosen, just use the plain prompt
+    const finalPrompt =
+      style && style !== "None"
+        ? `${prompt}, in ${style} style`
+        : prompt;
 
     const result = await openai.images.generate({
-      model: "gpt-image-1",
+      model: "gpt-image-1.5",
       prompt: finalPrompt,
       size: "1024x1024",
     });
