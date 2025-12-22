@@ -8,7 +8,7 @@ export default function Home() {
   const [image, setImage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  // Full list of art styles
+  // ✅ Full art style list from original file
   const styles = [
     "None",
     "Photorealistic",
@@ -135,28 +135,30 @@ export default function Home() {
 
   return (
     <main>
-      <HeroSection
-        onGenerate={handleGenerate}
-        styles={styles} // Pass full style list to dropdown
-      />
-      {loading && (
-        <p style={{ textAlign: "center", color: "#FFD700" }}>
-          Generating your masterpiece...
-        </p>
-      )}
-      {image && (
-        <div style={{ textAlign: "center", marginTop: "2rem" }}>
-          <img
-            src={image}
-            alt="Generated"
-            style={{
-              borderRadius: "12px",
-              maxWidth: "90%",
-              boxShadow: "0 0 25px rgba(255, 215, 0, 0.4)",
-            }}
-          />
-        </div>
-      )}
+      <div className="generator">
+        <HeroSection onGenerate={handleGenerate} styles={styles} />
+
+        {loading && (
+          <p style={{ textAlign: "center", color: "#FFD700" }}>
+            Generating your masterpiece...
+          </p>
+        )}
+
+        {image && (
+          <div style={{ textAlign: "center", marginTop: "2rem" }}>
+            <img
+              src={image}
+              alt="Generated"
+              style={{
+                borderRadius: "12px",
+                maxWidth: "90%",
+                boxShadow: "0 0 35px rgba(255, 215, 0, 0.4)",
+              }}
+            />
+          </div>
+        )}
+      </div>
+
       <FeatureGrid />
     </main>
   );
