@@ -109,47 +109,49 @@ export default function HomePage() {
   const [style, setStyle] = useState(styles[0]);
 
   const handleGenerate = () => {
-    const finalPrompt =
-      style === "None" ? prompt : `${prompt}, ${style}`;
+    const cleanedPrompt = prompt.trim();
+    if (!cleanedPrompt) return;
+
+    const finalPrompt = style === "None" ? cleanedPrompt : `${cleanedPrompt}, ${style}`;
     console.log("Generate:", finalPrompt);
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center px-6 py-16">
-      {/* HERO */}
-      <section className="max-w-4xl text-center">
-        <div className="flex justify-center mb-4">
-          <div className="text-5xl gold-text font-bold">A</div>
+    <main className="min-h-screen flex flex-col items-center px-4 pt-14 pb-20">
+      {/* HERO + GENERATOR */}
+      <section className="w-full max-w-[420px] text-center">
+        <div className="flex justify-center mb-6">
+          <div className="text-6xl gold-text font-bold">A</div>
         </div>
 
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          Create <span className="gold-text">Stunning AI Images</span>
-          <br /> in Seconds.
+        <h1 className="text-3xl font-bold leading-tight mb-4">
+          Create Stunning AI Images
+          <br />
+          <span className="gold-text">in Seconds.</span>
         </h1>
 
-        <p className="text-muted max-w-2xl mx-auto mb-10">
-          Turn your ideas into incredible visuals with Aiexor’s powerful AI
-          image generator. Fast, easy, and limitless creativity at your
-          fingertips.
+        <p className="text-sm text-muted mb-8">
+          Turn your ideas into incredible visuals with Aiexor’s powerful AI image
+          generator. Fast, easy, and limitless creativity at your fingertips.
         </p>
 
-        {/* GENERATOR */}
-        <div className="glass glow-border rounded-2xl p-6 max-w-xl mx-auto">
-          <h3 className="font-semibold mb-4 flex items-center gap-2">
+        {/* GENERATOR CARD */}
+        <div className="glass glow-border rounded-2xl p-5">
+          <h3 className="font-semibold mb-4 flex items-center gap-2 text-left">
             🤖 AI Image Generator
           </h3>
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             <input
               placeholder="Describe your image idea..."
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleGenerate();
+              }}
             />
 
-            <select
-              value={style}
-              onChange={(e) => setStyle(e.target.value)}
-            >
+            <select value={style} onChange={(e) => setStyle(e.target.value)}>
               {styles.map((s) => (
                 <option key={s} value={s}>
                   {s}
@@ -158,8 +160,13 @@ export default function HomePage() {
             </select>
 
             <button
-              className="btn-gold w-full"
+              className="btn-gold w-full py-3 text-sm"
               onClick={handleGenerate}
+              disabled={!prompt.trim()}
+              style={{
+                opacity: prompt.trim() ? 1 : 0.6,
+                cursor: prompt.trim() ? "pointer" : "not-allowed",
+              }}
             >
               Generate Image
             </button>
@@ -168,41 +175,36 @@ export default function HomePage() {
       </section>
 
       {/* FEATURES */}
-      <section className="grid md:grid-cols-3 gap-6 max-w-5xl w-full mt-20">
-        {[
-          {
-            title: "Speed",
-            icon: "⚡",
-            text: "Generate high-quality images in just seconds.",
-          },
-          {
-            title: "Creativity",
-            icon: "💡",
-            text: "Bring any concept to life with detailed, unique visuals.",
-          },
-          {
-            title: "Quality",
-            icon: "💎",
-            text: "Powered by advanced AI for stunning, high-resolution results.",
-          },
-        ].map((item) => (
-          <div
-            key={item.title}
-            className="glass glow-border rounded-xl p-6 text-center"
-          >
-            <div className="text-3xl mb-3">{item.icon}</div>
-            <h4 className="font-semibold mb-2 gold-text">{item.title}</h4>
-            <p className="text-muted text-sm">{item.text}</p>
-          </div>
-        ))}
+      <section className="w-full max-w-[420px] mt-16 space-y-10">
+        <div>
+          <div className="text-xl mb-2">⚡</div>
+          <h4 className="font-semibold mb-1">Speed</h4>
+          <p className="text-sm text-muted">
+            Generate high-quality images in just seconds.
+          </p>
+        </div>
+
+        <div>
+          <div className="text-xl mb-2">💡</div>
+          <h4 className="font-semibold mb-1">Creativity</h4>
+          <p className="text-sm text-muted">
+            Bring any concept to life with detailed, unique visuals.
+          </p>
+        </div>
+
+        <div>
+          <div className="text-xl mb-2">💎</div>
+          <h4 className="font-semibold mb-1">Quality</h4>
+          <p className="text-sm text-muted">
+            Powered by advanced AI for stunning, high-resolution results.
+          </p>
+        </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="text-muted text-sm mt-20 text-center">
-        <p className="mb-2">
-          Made with <span className="gold-text">❤</span> by Aiexor
-        </p>
-        <p>© 2025 Aiexor</p>
+      <footer className="text-xs text-muted mt-20 text-center">
+        Made with <span className="gold-text">❤</span> by Aiexor
+        <br />© 2025 Aiexor
       </footer>
     </main>
   );
