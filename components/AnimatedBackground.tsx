@@ -16,15 +16,15 @@ export default function AnimatedBackground() {
     const particles: { x: number; y: number; dx: number; dy: number; size: number }[] = [];
 
     const numParticles = 60;
-    const colors = ["#00e0d8", "#00ffff", "#ffd700"];
+    const colors = ["#FFD700", "#FFEC8B", "#E6BE8A"]; // 24K gold palette
 
     for (let i = 0; i < numParticles; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        dx: (Math.random() - 0.5) * 0.6,
-        dy: (Math.random() - 0.5) * 0.6,
-        size: Math.random() * 2.2 + 0.8,
+        dx: (Math.random() - 0.5) * 0.4,
+        dy: (Math.random() - 0.5) * 0.4,
+        size: Math.random() * 2.5 + 0.8,
       });
     }
 
@@ -32,9 +32,10 @@ export default function AnimatedBackground() {
       if (!ctx) return;
       ctx.clearRect(0, 0, width, height);
 
+      // Warm golden gradient background
       const gradient = ctx.createLinearGradient(0, 0, width, height);
-      gradient.addColorStop(0, "rgba(0, 224, 216, 0.1)");
-      gradient.addColorStop(1, "rgba(255, 215, 0, 0.05)");
+      gradient.addColorStop(0, "rgba(255, 215, 0, 0.05)");
+      gradient.addColorStop(1, "rgba(255, 236, 139, 0.1)");
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);
 
@@ -75,7 +76,7 @@ export default function AnimatedBackground() {
         zIndex: -1,
         width: "100%",
         height: "100%",
-        background: "linear-gradient(to bottom right, #0a0a0a, #002626)",
+        background: "linear-gradient(to bottom right, #0a0a0a, #1a1a1a)",
       }}
     />
   );
