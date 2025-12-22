@@ -2,16 +2,15 @@
 
 import { useState } from "react";
 
-export default function HeroSection({ onGenerate }: { onGenerate: (prompt: string, style: string) => void }) {
+export default function HeroSection({
+  onGenerate,
+  styles,
+}: {
+  onGenerate: (prompt: string, style: string) => void;
+  styles: string[];
+}) {
   const [prompt, setPrompt] = useState("");
-  const [style, setStyle] = useState("Luxury Gold");
-
-  const artStyles = [
-    "Luxury Gold", "Photorealistic", "Oil Painting", "Watercolor", "Digital Painting", "Cyberpunk",
-    "Steampunk", "Fantasy Illustration", "Anime", "Pixel Art", "Vector Art", "3D Render",
-    "Neon Glow", "Retro Futurism", "Surrealism", "Minimalism", "Abstract", "Dreamcore", "Lofi Aesthetic",
-    "Line Art", "Ink Wash", "Pop Art", "Noir", "Cinematic", "Realism"
-  ];
+  const [style, setStyle] = useState("None");
 
   return (
     <section
@@ -32,6 +31,7 @@ export default function HeroSection({ onGenerate }: { onGenerate: (prompt: strin
       >
         Create <span style={{ color: "#ffec8b" }}>Stunning AI Images</span> in Seconds.
       </h1>
+
       <p
         style={{
           fontSize: "1.1rem",
@@ -41,7 +41,8 @@ export default function HeroSection({ onGenerate }: { onGenerate: (prompt: strin
           lineHeight: 1.7,
         }}
       >
-        Turn your ideas into incredible visuals with Aiexor's powerful AI image generator. Fast, easy, and limitless creativity at your fingertips.
+        Turn your ideas into incredible Ai art with Aiexor Image Creator
+        Powered by OPENAI. Fast, easy, and limitless creativity at your fingertips.
       </p>
 
       {/* Generator Card */}
@@ -89,7 +90,7 @@ export default function HeroSection({ onGenerate }: { onGenerate: (prompt: strin
             marginBottom: "1.5rem",
           }}
         >
-          {artStyles.map((s) => (
+          {styles.map((s) => (
             <option key={s} value={s}>
               {s}
             </option>
