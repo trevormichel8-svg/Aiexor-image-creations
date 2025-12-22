@@ -12,7 +12,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {/* GOLD STREAK BACKGROUND */}
+        <div className="gold-streaks">
+          <span className="gold-streak" />
+          <span className="gold-streak" />
+          <span className="gold-streak" />
+        </div>
+
+        {children}
+      </body>
     </html>
   );
 }
