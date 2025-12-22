@@ -10,11 +10,8 @@ const openai = new OpenAI({
 });
 
 export async function POST(req: Request) {
-  console.log("🔵 /api/generate hit");
-
   try {
     const { prompt } = await req.json();
-    console.log("🟡 Prompt:", prompt);
 
     const result = await openai.images.generate({
       model: "gpt-image-1",
@@ -22,20 +19,19 @@ export async function POST(req: Request) {
       size: "1024x1024",
     });
 
-    console.log("🟢 OpenAI response:", result);
+    const base64Image = result.data[0].b64_json;
 
-    return NextResponse.json({
-      imageUrl: result.data?.[0]?.url ?? null,
-      raw: result,
-    });
+    if (!base64Image) {
+      throw new Error("No image returned");
+    }
+
+    const imageUrl = `data:image/png;base64,${base64Image}`;
+
+    return NextResponse.json({ imageUrl });
   } catch (err: any) {
-    console.error("🔴 GENERATE ERROR:", err);
-
+    console.error("IMAGE ERROR:", err);
     return NextResponse.json(
-      {
-        error: err?.message ?? "Unknown error",
-        full: err,
-      },
+      { error: err.message ?? "Image generation failed" },
       { status: 500 }
     );
   }
