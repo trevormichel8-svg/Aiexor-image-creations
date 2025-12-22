@@ -1,48 +1,71 @@
 import "../styles/globals.css";
-import AnimatedBackground from "../components/AnimatedBackground";
 
 export const metadata = {
   title: "Aiexor.com",
-  description: "Turning ideas into stunning AI art with Aiexor Image Creator powered by OpenAI",
+  description:
+    "Turning ideas into incredable  AI art with Aiexor Image Creator powered by OPENAI",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <head>
         {/* Google Fonts */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@400;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;700&display=swap"
           rel="stylesheet"
         />
       </head>
       <body>
-        {/* Subtle animated background */}
-        <AnimatedBackground />
-
-        {/* Simplified Header */}
-        <header>
+        {/* Header */}
+        <header
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "1.5rem 0",
+            background: "rgba(0,0,0,0.7)",
+            borderBottom: "1px solid rgba(255,215,0,0.3)",
+            boxShadow: "0 0 25px rgba(255,215,0,0.2)",
+            position: "sticky",
+            top: 0,
+            zIndex: 10,
+          }}
+        >
           <h1
-            className="logo"
             style={{
-              color: "#00e0d8",
               fontFamily: "Orbitron, sans-serif",
-              fontSize: "1.8rem",
-              fontWeight: 600,
+              fontSize: "2rem",
+              fontWeight: 700,
+              background:
+                "linear-gradient(90deg, #FFD700 0%, #8B8000 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              textShadow: "0 0 25px rgba(255,215,0,0.3)",
               letterSpacing: "1px",
-              textShadow: "0 0 10px rgba(0, 224, 216, 0.5)",
             }}
           >
-            Aiexor Image Creator
+            Aiexor.com
           </h1>
         </header>
 
-        {/* Main content */}
         <main>{children}</main>
 
-        {/* Footer */}
-        <footer className="footer">
-          © {new Date().getFullYear()} Aiexor.com — Turning ideas into stunning AI art
+        <footer
+          style={{
+            textAlign: "center",
+            padding: "1.5rem",
+            borderTop: "1px solid rgba(255,215,0,0.3)",
+            background: "rgba(0,0,0,0.6)",
+            color: "#bfbfbf",
+            fontSize: "0.9rem",
+          }}
+        >
+          © {new Date().getFullYear()} Aiexor.com — Turning ideas into stunning AI art.
         </footer>
       </body>
     </html>
