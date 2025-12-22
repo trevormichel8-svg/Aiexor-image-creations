@@ -2,8 +2,8 @@ import "../styles/globals.css";
 import AnimatedBackground from "../components/AnimatedBackground";
 
 export const metadata = {
-  title: "Aiexor – AI Image Creator",
-  description: "Generate stunning AI art in seconds with Aiexor",
+  title: "Aiexor.com",
+  description: "Turning ideas into stunning AI art with Aiexor Image Creator powered by OpenAI",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -20,24 +20,29 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Subtle animated background */}
         <AnimatedBackground />
 
-        {/* Header */}
+        {/* Simplified Header */}
         <header>
-          <h1 className="logo">
-            Aiexor<span style={{ color: "#ffd700" }}>.</span>
+          <h1
+            className="logo"
+            style={{
+              color: "#00e0d8",
+              fontFamily: "Orbitron, sans-serif",
+              fontSize: "1.8rem",
+              fontWeight: 600,
+              letterSpacing: "1px",
+              textShadow: "0 0 10px rgba(0, 224, 216, 0.5)",
+            }}
+          >
+            Aiexor Image Creator
           </h1>
-          <nav>
-            <a href="/">Home</a>
-            <a href="/gallery">Gallery</a>
-            <a href="/login">Login</a>
-          </nav>
         </header>
 
-        {/* Main page content */}
+        {/* Main content */}
         <main>{children}</main>
 
         {/* Footer */}
         <footer className="footer">
-          © {new Date().getFullYear()} Aiexor — Powered by AI & Creativity
+          © {new Date().getFullYear()} Aiexor.com — Turning ideas into stunning AI art
         </footer>
       </body>
     </html>
